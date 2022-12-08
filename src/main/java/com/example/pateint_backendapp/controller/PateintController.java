@@ -30,4 +30,14 @@ public class PateintController {
         dao.save(p);
         return "PATEINT ADDED";
     }
+
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/search",consumes = "application/json",produces = "application/json")
+    public List<Pateint> searchEmployee(@RequestBody Pateint p)
+    {
+        String name=String.valueOf(p.getName());
+        System.out.println(name);
+        return (List<Pateint>) dao.searchPateint(p.getName());
+    }
 }
