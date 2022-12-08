@@ -5,6 +5,7 @@ import com.example.pateint_backendapp.model.Pateint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -39,5 +40,18 @@ public class PateintController {
         String name=String.valueOf(p.getName());
         System.out.println(name);
         return (List<Pateint>) dao.searchPateint(p.getName());
+    }
+
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/delete",consumes = "application/json",produces = "application/json")
+    public HashMap<String, String> delete(@RequestBody Pateint p)
+    {
+        String id=String.valueOf(p.getId());
+        System.out.println(id);
+        dao.deletePateint(p.getId());
+        HashMap<String,String> map=new HashMap<>();
+        map.put("status","success");
+        return map;
     }
 }
